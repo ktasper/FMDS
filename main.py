@@ -9,7 +9,6 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
 
-
 class CustomLogger:
     def __init__(self, text_widget):
         self.text_widget = text_widget
@@ -21,7 +20,6 @@ class CustomLogger:
 
     def flush(self):
         pass
-
 
 class ToolTip:
     def __init__(self, widget, text):
@@ -132,9 +130,9 @@ def weight_calc(position, category_id, position_weights: json, squad_rawdata):
         return 0
 
 
-def main(export_path, output_path):
+def main(fm_export_path, output_path):
     # finds most recent file in specified folder
-    export_dir: str = export_path
+    export_dir: str = fm_export_path
 
     list_of_files = glob.glob(os.path.join(export_dir, "*"))
     try:
@@ -279,10 +277,10 @@ def main(export_path, output_path):
 
 
 # Function to select export path using file dialog
-def select_export_path():
-    global export_path
-    export_path = filedialog.askdirectory()
-    export_path_label.config(text="Export Path: " + export_path)
+def select_fm_export_path():
+    global fm_export_path
+    fm_export_path = filedialog.askdirectory()
+    fm_export_path_label.config(text="Export Path: " + fm_export_path)
 
 
 # Function to select output directory using file dialog
@@ -295,7 +293,7 @@ def select_output_dir():
 # Function to generate the HTML and perform other operations
 def generate_html():
     try:
-        main(export_path, output_dir)
+        main(fm_export_path, output_dir)
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
@@ -304,7 +302,7 @@ def generate_html():
 def save_config_to_json():
     try:
         config_data = {
-            "export_path": export_path,
+            "fm_export_path": fm_export_path,
             "output_dir": output_dir
             # Add more configuration parameters here if needed
         }
@@ -317,21 +315,21 @@ def save_config_to_json():
 
 # Function to load configuration settings from JSON file
 def load_config_from_json():
-    global export_path, output_dir  # Declare export_path and output_dir as global variables
+    global fm_export_path, output_dir  # Declare fm_export_path and output_dir as global variables
     try:
         with open("config.json", "r") as config_file:
             config_data = json.load(config_file)
-            export_path = config_data.get("export_path")
+            fm_export_path = config_data.get("fm_export_path")
             output_dir = config_data.get("output_dir")
-            if export_path and output_dir:
-                export_path_label.config(text="Export Path: " + export_path)
+            if fm_export_path and output_dir:
+                fm_export_path_label.config(text="Export Path: " + fm_export_path)
                 output_dir_label.config(text="Output Directory: " + output_dir)
                 print("Configuration loaded from config.json.")
             else:
                 print("Invalid configuration data in config.json.")
     except FileNotFoundError:
         print("No config.json file found.")
-    return export_path, output_dir  # Return the values if needed elsewhere 
+    return fm_export_path, output_dir  # Return the values if needed elsewhere 
 
 
 root = tk.Tk()
@@ -354,13 +352,13 @@ style.configure("TButton", padding=10, font=("Arial", 12))
 # Frame for export path
 export_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)
 export_frame.pack(pady=10, padx=10, fill="x")
-export_path_button = ttk.Button(
-    export_frame, text="Select Export Path", command=select_export_path
+fm_export_path_button = ttk.Button(
+    export_frame, text="Select Export Path", command=select_fm_export_path
 )
-export_path_button.pack(side="left")
-export_path_label = ttk.Label(export_frame, text="Export Path: Not Selected")
-export_path_label.pack(side="left")
-tooltip_export = ToolTip(export_path_button, "Select the export path")
+fm_export_path_button.pack(side="left")
+fm_export_path_label = ttk.Label(export_frame, text="Export Path: Not Selected")
+fm_export_path_label.pack(side="left")
+tooltip_export = ToolTip(fm_export_path_button, "Select the export path")
 
 # Frame for output directory
 output_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)

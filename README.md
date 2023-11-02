@@ -55,4 +55,4 @@ The script will process the exported data, calculate player scores based on posi
 Customize player attribute weights for different positions by editing the positions.json file. Update the attributes and weights based on your game preferences.
 
 ## Notes
-The script only works on the latest file in the `export_path`.
+The script only works on the latest file in the `fm_export_path`.
