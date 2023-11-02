@@ -2,7 +2,7 @@
     "positions": {
         "gk_def": {
             "essential": {
-                "attributes": ["Ref"],
+                "attributes": ["Agi", "Ref"],
                 "weight": 5
             },
             "core": {
