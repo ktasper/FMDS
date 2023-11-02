@@ -1,0 +1,28 @@
+{
+    "positions": {
+        "gk_def": {
+            "essential": {
+                "attributes": ["Ref"],
+                "weight": 5
+            },
+            "core": {
+                "attributes": ["1v1", "Ant", "Cmd", "Cnt", "Kic", "Pos"],
+                "weight": 3
+            },
+            "secondary": {
+                "attributes": ["Acc", "Aer", "Cmp", "Dec", "Fir", "Han", "Pas", "Thr", "Vis"],
+                "weight": 1
+            }
+        },
+        "cb_def": {
+            "core": {
+                "attributes": ["Cmp", "Hea","Jum", "Mar", "Pas", "Pos", "Str", "Tck", "Pac"],
+                "weight": 0.75
+            },
+            "secondary": {
+                "attributes": ["Agg", "Ant", "Bra", "Cnt", "Dec", "Fir", "Tec", "Vis"],
+                "weight": 0.25
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "order": [
+        "Inf",
+        "Name",
+        "Age",
+        "Club",
+        "Transfer Value",
+        "Wage",
+        "Nat",
+        "Position",
+        "Personality",
+        "Media Handling",
+        "Left Foot",
+        "Right Foot",
+        "Spd",
+        "Jum",
+        "Str",
+        "Work",
+        "Height"
+    ]
+}
