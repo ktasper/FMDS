@@ -85,8 +85,12 @@ def weight_calc(position, category_id):
 
 
 # finds most recent file in specified folder
-with open("config.json", "r") as config_file:
-    config_data = json.load(config_file)
+try:
+    with open("config.json", "r") as config_file:
+        config_data = json.load(config_file)
+except FileNotFoundError:
+    print ("Could not find the config.json file")
+    os._exit(1)
 export_dir: str = config_data["export_path"]
 
 
@@ -182,8 +186,11 @@ allowed_view_items = [
 
 
 # Add the views from the "views.json" to the final views list if its in the allowed list
-with open("views.json", "r") as views_json:
-    core_views = json.load(views_json)
+try:
+    with open("views.json", "r") as views_json:
+        core_views = json.load(views_json)
+except FileNotFoundError:
+    print ("Could not find the views.json file")
 for view_item in core_views["order"]:
     if view_item in allowed_view_items:
         final_view_headers.append(view_item)
@@ -191,22 +198,25 @@ for view_item in core_views["order"]:
         print(f"Ignoring {view_item} since it is not in the allowed views list")
 
 # Load position weights from JSON file
-with open("positions.json", "r") as json_file:
-    position_weights = json.load(json_file)
+try:
+    with open("positions.json", "r") as json_file:
+        position_weights = json.load(json_file)
 
-    # Retrieve position category from JSON configuration
-    position_category = list(
-        position_weights["positions"].keys()
-    )  # Get the key from the "positions" dictionary
-    for position in position_category:
-        squad_rawdata[f"{position}"] = 0
-        # Now get each scoring category from the json ie: "core, essential etc"
-        scoring_categories = list(position_weights["positions"][position].keys())
-        for category in scoring_categories:
-            # Add the data back to the data frame after we have run some calculations on it
-            squad_rawdata[f"{position}"] += weight_calc(position, category)
-        squad_rawdata[position] = squad_rawdata[position].round(1)
-        final_view_headers.append(position)
+        # Retrieve position category from JSON configuration
+        position_category = list(
+            position_weights["positions"].keys()
+        )  # Get the key from the "positions" dictionary
+        for position in position_category:
+            squad_rawdata[f"{position}"] = 0
+            # Now get each scoring category from the json ie: "core, essential etc"
+            scoring_categories = list(position_weights["positions"][position].keys())
+            for category in scoring_categories:
+                # Add the data back to the data frame after we have run some calculations on it
+                squad_rawdata[f"{position}"] += weight_calc(position, category)
+            squad_rawdata[position] = squad_rawdata[position].round(1)
+            final_view_headers.append(position)
+except FileNotFoundError:
+    print ("Could not find the positions.json file")
 
 
 squad = squad_rawdata[final_view_headers]
