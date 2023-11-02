@@ -56,14 +56,14 @@ def weight_calc(position, category_id):
             len(position_weights["positions"][position][category_id]["attributes"])
             * weight
         )
-        print(
-            f"""
-              Debug:
-              Position: {position}
-              Cat: {category_id}
-              Debug weight: {weight}
-              normaliser: {normaliser}"""
-        )
+        #print(
+        #    f"""
+        #      Debug:
+        #      Position: {position}
+        #      Cat: {category_id}
+        #      Debug weight: {weight}
+        #      normaliser: {normaliser}"""
+        #)
         attribute_values = (
             sum(squad_rawdata[attribute] for attribute in attributes) * weight
         )
@@ -73,14 +73,14 @@ def weight_calc(position, category_id):
         else:
             return 0
     else:
-        print(
-            f"""
-              Debug:
-              Position: {position}
-              Cat: {category_id}
-              Debug weight: Not set (0)
-              normaliser: Not Set (0)"""
-        )
+        #print(
+        #    f"""
+        #      Debug:
+        #      Position: {position}
+        #      Cat: {category_id}
+        #      Debug weight: Not set (0)
+        #      normaliser: Not Set (0)"""
+        #)
         return 0
 
 
@@ -102,7 +102,7 @@ except ValueError:
     print(f"No files found in {export_dir}")
     latest_filename = None
 
-print(f"Debug Latest File: {latest_filename}")
+#print(f"Debug Latest File: {latest_filename}")
 
 # Read HTML file exported by FM - in this case an example of an output from the squad page
 # This reads as a list, not a dataframe
@@ -170,6 +170,8 @@ allowed_view_items = [
     "Pas",
     "Pos",
     "Ref",
+    "Spd",
+    "Work",
     "Sta",
     "Str",
     "Tck",
