@@ -300,6 +300,40 @@ def generate_html():
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
 
+# Function to save configuration settings to JSON file
+def save_config_to_json():
+    try:
+        config_data = {
+            "export_path": export_path,
+            "output_dir": output_dir
+            # Add more configuration parameters here if needed
+        }
+        with open("config.json", "w") as config_file:
+            json.dump(config_data, config_file)
+        print("Configuration saved to config.json.")
+    except NameError:
+        print("Please set the paths before saving!")
+
+
+# Function to load configuration settings from JSON file
+def load_config_from_json():
+    global export_path, output_dir  # Declare export_path and output_dir as global variables
+    try:
+        with open("config.json", "r") as config_file:
+            config_data = json.load(config_file)
+            export_path = config_data.get("export_path")
+            output_dir = config_data.get("output_dir")
+            if export_path and output_dir:
+                export_path_label.config(text="Export Path: " + export_path)
+                output_dir_label.config(text="Output Directory: " + output_dir)
+                print("Configuration loaded from config.json.")
+            else:
+                print("Invalid configuration data in config.json.")
+    except FileNotFoundError:
+        print("No config.json file found.")
+    return export_path, output_dir  # Return the values if needed elsewhere 
+
+
 root = tk.Tk()
 root.title("Your Application")
 
@@ -339,12 +373,22 @@ output_dir_label = ttk.Label(output_frame, text="Output Directory: Not Selected"
 output_dir_label.pack(side="left")
 tooltip_output = ToolTip(output_dir_button, "Select the output directory")
 
+# Frame for save and load config buttons
+config_frame = ttk.Frame(root, style="TFrame")
+config_frame.pack(pady=10, padx=10, fill="x")
+
+# Button to load config from JSON
+load_button = ttk.Button(config_frame, text="Load Config", command=load_config_from_json, style="TButton")
+load_button.pack(side="left")
+
+# Button to save config to JSON
+save_button = ttk.Button(config_frame, text="Save Config", command=save_config_to_json, style="TButton")
+save_button.pack(side="left")
 
 # Action button with an icon
 action_button = ttk.Button(
     root, text="Generate", command=generate_html, compound="left", style="TButton"
 )
 action_button.pack(pady=10)
-
 
 root.mainloop()
