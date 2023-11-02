@@ -85,7 +85,11 @@ def weight_calc(position, category_id):
 
 
 # finds most recent file in specified folder
-export_dir: str = "E:\git\personal\FMDS\exports"
+with open("config.json", "r") as config_file:
+    config_data = json.load(config_file)
+export_dir: str = config_data["export_path"]
+
+
 list_of_files = glob.glob(os.path.join(export_dir, "*"))
 try:
     latest_file = max(list_of_files, key=os.path.getctime)
