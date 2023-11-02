@@ -2,14 +2,55 @@ import glob
 import json
 import os
 import uuid
-import logging
+import sys
 import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import ttk
 
-# Default configuration
-config_data = {"export_path": "", "output_directory": ""}
+
+class CustomLogger:
+    def __init__(self, text_widget):
+        self.text_widget = text_widget
+
+    def write(self, message):
+        self.text_widget.insert(tk.END, message)
+        self.text_widget.see(tk.END)  # Autoscroll to the bottom
+        self.text_widget.update_idletasks()  # Update the Tkinter GUI
+
+    def flush(self):
+        pass
+
+
+class ToolTip:
+    def __init__(self, widget, text):
+        self.widget = widget
+        self.text = text
+        self.tooltip = None
+        self.widget.bind("<Enter>", self.display_tooltip)
+        self.widget.bind("<Leave>", self.hide_tooltip)
+
+    def display_tooltip(self, event):
+        x, y, _, _ = self.widget.bbox("insert")
+        x += self.widget.winfo_rootx() + 25
+        y += self.widget.winfo_rooty() + 25
+        self.tooltip = tk.Toplevel(self.widget)
+        self.tooltip.wm_overrideredirect(True)
+        self.tooltip.wm_geometry(f"+{x}+{y}")
+        label = tk.Label(
+            self.tooltip,
+            text=self.text,
+            background="#ffffe0",
+            relief="solid",
+            borderwidth=1,
+        )
+        label.pack()
+
+    def hide_tooltip(self, event):
+        if self.tooltip:
+            self.tooltip.destroy()
+            self.tooltip = None
 
 
 def gen_html(dataframe: pd.DataFrame):
@@ -234,15 +275,7 @@ def main(export_path, output_path):
     # creates a sortable html export from the dataframe 'squad'
     html = gen_html(squad)
     open(filename, "w", encoding="utf-8").write(html)
-
-
-# Initialize Tkinter
-root = tk.Tk()
-root.title("Dashboard")
-
-# Create a label for feedback
-feedback_label = tk.Label(root, text="")
-feedback_label.pack(pady=10)
+    print(f"Saved file: {filename}")
 
 
 # Function to select export path using file dialog
@@ -258,37 +291,60 @@ def select_output_dir():
     output_dir = filedialog.askdirectory()
     output_dir_label.config(text="Output Directory: " + output_dir)
 
+
 # Function to generate the HTML and perform other operations
 def generate_html():
     try:
         main(export_path, output_dir)
-        logging.info("Action performed successfully")
-        feedback_label.config(text="Action completed successfully")
     except Exception as e:
-        logging.error(f"An error occurred: {str(e)}")
-        feedback_label.config(text=f"Error: {str(e)}")
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
-# UI Elements
-export_path_button = tk.Button(
-    root, text="Select Export Path", command=select_export_path
+
+root = tk.Tk()
+root.title("Your Application")
+
+# Create a Text widget for logging
+log_text = tk.Text(root, wrap=tk.WORD, height=20, width=80)
+log_text.pack(padx=10, pady=10, expand=True, fill=tk.BOTH)
+
+# Redirect sys.stdout and sys.stderr to the custom logger
+custom_logger = CustomLogger(log_text)
+sys.stdout = custom_logger
+sys.stderr = custom_logger
+
+
+# Configure styles
+style = ttk.Style()
+style.configure("TButton", padding=10, font=("Arial", 12))
+
+# Frame for export path
+export_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)
+export_frame.pack(pady=10, padx=10, fill="x")
+export_path_button = ttk.Button(
+    export_frame, text="Select Export Path", command=select_export_path
 )
-export_path_button.pack(pady=10)
+export_path_button.pack(side="left")
+export_path_label = ttk.Label(export_frame, text="Export Path: Not Selected")
+export_path_label.pack(side="left")
+tooltip_export = ToolTip(export_path_button, "Select the export path")
 
-export_path_label = tk.Label(root, text="Export Path: Not Selected")
-export_path_label.pack(pady=10)
-
-output_dir_button = tk.Button(
-    root, text="Select Output Directory", command=select_output_dir
+# Frame for output directory
+output_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)
+output_frame.pack(pady=10, padx=10, fill="x")
+output_dir_button = ttk.Button(
+    output_frame, text="Select Output Directory", command=select_output_dir
 )
-output_dir_button.pack(pady=10)
+output_dir_button.pack(side="left")
+output_dir_label = ttk.Label(output_frame, text="Output Directory: Not Selected")
+output_dir_label.pack(side="left")
+tooltip_output = ToolTip(output_dir_button, "Select the output directory")
 
-output_dir_label = tk.Label(root, text="Output Directory: Not Selected")
-output_dir_label.pack(pady=10)
 
-
-action_button = tk.Button(root, text="Generate", command=generate_html)
+# Action button with an icon
+action_button = ttk.Button(
+    root, text="Generate", command=generate_html, compound="left", style="TButton"
+)
 action_button.pack(pady=10)
 
-# Start the Tkinter main loop
+
 root.mainloop()
