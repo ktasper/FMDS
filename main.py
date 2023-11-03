@@ -333,7 +333,8 @@ def load_config_from_json():
 
 
 root = tk.Tk()
-root.title("Your Application")
+root.iconbitmap("media/icon.ico")
+root.title("FMDS")
 
 # Create a Text widget for logging
 log_text = tk.Text(root, wrap=tk.WORD, height=20, width=80)

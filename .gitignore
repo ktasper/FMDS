@@ -158,3 +158,6 @@ generated_data/*
 .vscode
 
 .DS_Store
+config.json
+package
+.exe

@@ -1,16 +1,16 @@
 {
     "positions": {
-        "gk_def": {
+        "gk_sweep_supp": {
             "essential": {
                 "attributes": ["Agi", "Ref"],
                 "weight": 5
             },
             "core": {
-                "attributes": ["1v1", "Ant", "Cmd", "Cnt", "Kic", "Pos"],
+                "attributes": ["1v1", "Ant", "Cmd", "Cnt", "Kic", "Pos", "Pas"],
                 "weight": 3
             },
             "secondary": {
-                "attributes": ["Acc", "Aer", "Cmp", "Dec", "Fir", "Han", "Pas", "Thr", "Vis"],
+                "attributes": ["Acc", "Aer", "Cmp", "Dec", "Fir", "Han", "Thr", "Vis"],
                 "weight": 1
             }
         },
