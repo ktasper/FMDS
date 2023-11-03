@@ -263,12 +263,12 @@ def main(fm_export_path, output_path):
 
     squad = squad_rawdata[final_view_headers]
     # Create the dir if it does not exist
-    if not os.path.exists(f"{output_path}/generated_data/"):
-        os.makedirs(f"{output_path}/generated_data/")
+    if not os.path.exists(f"{output_path}/fmds_fmds_generated_data/"):
+        os.makedirs(f"{output_path}/fmds_generated_data/")
     # generates random file name for write-out of html file based on the file we use
 
     filename = str(
-        f"{output_path}/generated_data/{latest_filename}-{uuid.uuid4()}.html"
+        f"{output_path}/fmds_generated_data/{latest_filename}-{uuid.uuid4()}.html"
     )
     # creates a sortable html export from the dataframe 'squad'
     html = gen_html(squad)
@@ -354,12 +354,12 @@ style.configure("TButton", padding=10, font=("Arial", 12))
 export_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)
 export_frame.pack(pady=10, padx=10, fill="x")
 fm_export_path_button = ttk.Button(
-    export_frame, text="Select Export Path", command=select_fm_export_path
+    export_frame, text="Select FM Exported Data Path", command=select_fm_export_path
 )
 fm_export_path_button.pack(side="left")
 fm_export_path_label = ttk.Label(export_frame, text="Export Path: Not Selected")
 fm_export_path_label.pack(side="left")
-tooltip_export = ToolTip(fm_export_path_button, "Select the export path")
+tooltip_export = ToolTip(fm_export_path_button, "Select the export path containing the exported views from Football Manager")
 
 # Frame for output directory
 output_frame = ttk.Frame(root, padding=10, relief="solid", borderwidth=1)
@@ -370,7 +370,7 @@ output_dir_button = ttk.Button(
 output_dir_button.pack(side="left")
 output_dir_label = ttk.Label(output_frame, text="Output Directory: Not Selected")
 output_dir_label.pack(side="left")
-tooltip_output = ToolTip(output_dir_button, "Select the output directory")
+tooltip_output = ToolTip(output_dir_button, "Select the output directory, This will create a fmds_generated_data folder")
 
 # Frame for save and load config buttons
 config_frame = ttk.Frame(root, style="TFrame")
