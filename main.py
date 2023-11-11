@@ -9,6 +9,8 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
 
+
+fm_export_path = ""
 class CustomLogger:
     def __init__(self, text_widget):
         self.text_widget = text_widget

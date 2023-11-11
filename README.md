@@ -5,6 +5,13 @@ First thing first, Thanks to [squirrel_plays](https://www.youtube.com/@squirrel_
 
 ## Prerequisites
 - Windows 11 (May work on 10 & 7)
+
+## Install
+- [Download the latest zip from Github](https://github.com/ktasper/FMDS/releases)
+- Extract the zip to a new folder, I do `Documents/FMDS`
+- Run the `exe`
+- Or `python main.py` if doing it via the source code.
+
 ## Usage
 1. Export Data from Football Manager
 - Export squad data from Football Manager and save it to a folder.
@@ -43,7 +50,12 @@ We also create a few custom metrics:
 - Execute the fm_data_science.py script.
 - Run the `fmds.exe`
     - or `python main.py`
-The script will process the exported data, calculate player scores based on position weights, and generate an interactive HTML report.
+
+The program will ask you for the following:
+
+- `FM Export Path` - This is where you saved the exported views (IE player / Team stats) via the views under `fm_files`
+- `Output Dir` - This is where the generated reports go.
+- `Save / Load Config` - Lets you save or load the above settings so you do need to set them each time (NOTE: you need to press load to load the settings.)
 
 5. Generated HTML Report
 - The script generates an HTML report (output.html) with DataTables integration. Open this file in a web browser to view the interactive report. The file gets saved to the `generated_data` folder
@@ -53,6 +65,8 @@ The script will process the exported data, calculate player scores based on posi
 ### Modifying Position Weights
 
 Customize player attribute weights for different positions by editing the positions.json file. Update the attributes and weights based on your game preferences.
+
+[The position short code and what they mean can be found here](https://github.com/ktasper/FMDS/wiki/Attribute-Meanings)
 
 ## Notes
 The script only works on the latest file in the `fm_export_path`.
