@@ -53,6 +53,7 @@ We also create a few custom metrics:
 - Run the `fmds.exe`
     - or `python main.py`
 
+<img align="center" width="600" height="600" src="./media/ui-screenshot.webp">
 The program will ask you for the following:
 
 - `FM Export Path` - This is where you saved the exported views (IE player / Team stats) via the views under `fm_files`
@@ -62,6 +63,8 @@ The program will ask you for the following:
 5. Generated HTML Report
 - The script generates an HTML report (output.html) with DataTables integration. Open this file in a web browser to view the interactive report. The file gets saved to the `generated_data` folder
 
+
+
 ## Customization
 
 ### Modifying Position Weights
@@ -69,6 +72,8 @@ The program will ask you for the following:
 Customize player attribute weights for different positions by editing the positions.json file. Update the attributes and weights based on your game preferences.
 
 [The position short code and what they mean can be found here](https://github.com/ktasper/FMDS/wiki/Attribute-Meanings)
+
+<img align="center" width="800" height="500" src="./media/postions_json.png">
 
 ## Notes
 The script only works on the latest file in the `fm_export_path`.
