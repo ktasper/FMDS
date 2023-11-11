@@ -18,27 +18,18 @@ First thing first, Thanks to [squirrel_plays](https://www.youtube.com/@squirrel_
 1. Export Data from Football Manager
 - Export squad data from Football Manager and save it to a folder.
     - I use the `all_attribute_squad` for my squad view.
+      - The views can be found in the `fm_files` folder
     - Select all players with shift click
     - `CTRL + P` > Web Page
     - Save this file where-ever you want, I have a folder on my Desktop called `Documents/FMDS-Data` so its easy to do in the FM UI.
         - Don't forget to give it a name you understand.
-- Edit the `config.json` with your path to your FMDS-Data folder.
 
 3. Define Position Weights (Optional)
-- Customize player attribute weights for different positions by editing the positions.json file. Follow the specified format to define scoring categories such as "essential," "core," and "secondary."
+- Customize player attribute weights for different positions by editing the `positions.json` file. Follow the specified format to define scoring categories such as "essential," "core," and "secondary."
     - You can add as many or as little categories as you want.
+    - [The position short code and what they mean can be found here](https://github.com/ktasper/FMDS/wiki/Attribute-Meanings)
+    
 
-Supported names are:
-```
-[
-    "Reg", "Inf", "Name", "Age", "Wage", "Transfer Value", "Nat", "2nd Nat",
-    "Position", "Personality", "Media Handling", "Av Rat", "Left Foot", "Right Foot",
-    "Height", "1v1", "Acc", "Aer", "Agg", "Agi", "Ant", "Bal", "Bra", "Cmd", "Cnt",
-    "Cmp", "Cro", "Dec", "Det", "Dri", "Fin", "Fir", "Fla", "Han", "Hea", "Jum", "Kic",
-    "Ldr", "Lon", "Mar", "OtB", "Pac", "Pas", "Pos", "Ref", "Sta", "Str", "Tck", "Tea",
-    "Tec", "Thr", "TRO", "Vis", "Wor", "UID", "Cor", "Club"
-]
-```
 
 We also create a few custom metrics:
 ```
@@ -75,5 +66,21 @@ Customize player attribute weights for different positions by editing the positi
 
 <img align="center" width="800" height="500" src="./media/postions_json.png">
 
+### Custom Generated Views
+
+Supported names are:
+```
+[
+    "Reg", "Inf", "Name", "Age", "Wage", "Transfer Value", "Nat", "2nd Nat",
+    "Position", "Personality", "Media Handling", "Av Rat", "Left Foot", "Right Foot",
+    "Height", "1v1", "Acc", "Aer", "Agg", "Agi", "Ant", "Bal", "Bra", "Cmd", "Cnt",
+    "Cmp", "Cro", "Dec", "Det", "Dri", "Fin", "Fir", "Fla", "Han", "Hea", "Jum", "Kic",
+    "Ldr", "Lon", "Mar", "OtB", "Pac", "Pas", "Pos", "Ref", "Sta", "Str", "Tck", "Tea",
+    "Tec", "Thr", "TRO", "Vis", "Wor", "UID", "Cor", "Club"
+]
+```
+
 ## Notes
 The script only works on the latest file in the `fm_export_path`.
+
+
