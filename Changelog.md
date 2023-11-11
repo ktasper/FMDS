@@ -7,12 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [Released]
-
-## [Unreleased]
-## [0.1.0] - 11-03-23
+## [0.1.0] - 11-11-23
 
 ### Added
 - This CHANGELOG file to hopefully serve as an evolving example of a
   standardized open source project CHANGELOG.
 - Added FMDS program
 - Added build step to generate zips for users who do not want to run `python`
+## [Unreleased]
