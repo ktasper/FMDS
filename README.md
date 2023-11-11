@@ -1,4 +1,6 @@
 # Football Manager Data Science (FMDS)
+<img align="center" width="100" height="100" src="./media/logo.png">
+
 FMDS is a Python script designed for Football Manager data analysis and reporting. This script processes exported data from Football Manager, calculates player attributes based on predefined weights, and generates interactive HTML reports using DataTables integration.
 
 First thing first, Thanks to [squirrel_plays](https://www.youtube.com/@squirrel_plays_fof4318) for the Inspiration and their hard work on the football manager views, Their code is under `./original.py`.
